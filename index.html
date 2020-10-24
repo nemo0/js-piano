@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0F2027;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #2C5364, #203A43, #0F2027);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #2C5364, #203A43, #0F2027);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        .piano {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .white {
+            width: 9%;
+            min-width: 60px;
+            height: 70%;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .black {
+            width: 8%;
+            height: 45%;
+            margin-left: -4%;
+            margin-right: -4%;
+            z-index: 2;
+            background-color: black;
+        }
+
+        .white.active {
+            background-color: #ccc;
+        }
+
+        .black.active {
+            background-color: #333;
+        }
+    </style>
+    <title>Piano</title>
+</head>
+
+<body>
+    <div class="piano">
+        <div class="key white" data-note="C"></div>
+        <div class="key black" data-note="Cs"></div>
+        <div class="key white" data-note="D"></div>
+        <div class="key black" data-note="Ds"></div>
+        <div class="key white" data-note="E"></div>
+        <div class="key white" data-note="F"></div>
+        <div class="key black" data-note="Fs"></div>
+        <div class="key white" data-note="G"></div>
+        <div class="key black" data-note="Gs"></div>
+        <div class="key white" data-note="A"></div>
+        <div class="key black" data-note="As"></div>
+        <div class="key white" data-note="B"></div>
+    </div>
+
+    <audio src="./notes/C4.mp3" id="C"></audio>
+    <audio src="./notes/Cs4.mp3" id="Cs"></audio>
+    <audio src="./notes/D4.mp3" id="D"></audio>
+    <audio src="./notes/Ds4.mp3" id="Ds"></audio>
+    <audio src="./notes/E4.mp3" id="E"></audio>
+    <audio src="./notes/F4.mp3" id="F"></audio>
+    <audio src="./notes/Fs4.mp3" id="Fs"></audio>
+    <audio src="./notes/G4.mp3" id="G"></audio>
+    <audio src="./notes/Gs4.mp3" id="Gs"></audio>
+    <audio src="./notes/A4.mp3" id="A"></audio>
+    <audio src="./notes/As4.mp3" id="As"></audio>
+    <audio src="./notes/B4.mp3" id="B"></audio>
+
+    <script>
+        const keys = document.querySelectorAll('.key');
+        const regulars = document.querySelectorAll('.key.white');
+        const sharps = document.querySelectorAll('.key.black');
+        const whites = ['a', 's', 'd', 'f', 'g', 'h', 'j'];
+        const blacks = ['w', 'e', 'r', 't', 'y']
+        const whiteKeys = document.querySelectorAll('.key.white')
+        const blackKeys = document.querySelectorAll('.key.black')
+
+        keys.forEach(key => {
+            key.addEventListener('click', () => playNote(key))
+        })
+
+        document.addEventListener('keydown', e => {
+            if (e.repeat) return
+            const key = e.key
+            const whiteKeyIndex = whites.indexOf(key)
+            const blackKeyIndex = blacks.indexOf(key)
+
+            if (whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex])
+            if (blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex])
+        })
+
+        let playNote = (key) => {
+            const noteSound = document.getElementById(key.dataset.note)
+            noteSound.currentTime = 0
+            noteSound.play()
+            key.classList.add('active')
+            noteSound.addEventListener('ended', () => {
+                key.classList.remove('active')
+            })
+        }
+    </script>
+</body>
+
+</html>
