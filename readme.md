@@ -1,4 +1,4 @@
-![https://j.gifs.com/mOoAOn.gif]()
+![](https://j.gifs.com/mOoAOn.gif)
 
 # Piano With JavaScript
 
