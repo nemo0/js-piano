@@ -91,8 +91,6 @@
         const sharps = document.querySelectorAll('.key.black');
         const whites = ['a', 's', 'd', 'f', 'g', 'h', 'j'];
         const blacks = ['w', 'e', 'r', 't', 'y']
-        const whiteKeys = document.querySelectorAll('.key.white')
-        const blackKeys = document.querySelectorAll('.key.black')
 
         keys.forEach(key => {
             key.addEventListener('click', () => playNote(key))
@@ -104,8 +102,8 @@
             const whiteKeyIndex = whites.indexOf(key)
             const blackKeyIndex = blacks.indexOf(key)
 
-            if (whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex])
-            if (blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex])
+            if (whiteKeyIndex > -1) playNote(regulars[whiteKeyIndex])
+            if (blackKeyIndex > -1) playNote(sharps[blackKeyIndex])
         })
 
         let playNote = (key) => {
